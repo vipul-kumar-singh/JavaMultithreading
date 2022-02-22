@@ -7,14 +7,15 @@ public class VolatileDemo {
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(2);
 
-        Shared sharedObj = new Shared();
+        Shared sharedObj1 = new Shared();
+        Shared sharedObj2 = new Shared();
 
         Runnable runnable = () -> {
             String threadName = Thread.currentThread().getName();
             System.out.println(threadName + " started");
             for (int i = 0; i < 100; i++) {
                 Shared.staticVar++;
-                sharedObj.volatileVar++;
+                sharedObj1.volatileVar++;
                 Shared.staticVolatileVar++;
             }
             countDownLatch.countDown();
@@ -26,9 +27,13 @@ public class VolatileDemo {
 
         countDownLatch.await();
 
-        System.out.println("volatileVar = " + sharedObj.volatileVar);
-        System.out.println("staticVar = " + Shared.staticVar);
-        System.out.println("staticVolatileVar = " + Shared.staticVolatileVar);
+        System.out.println("SharedObject1::staticVar = " + sharedObj1.staticVar);
+        System.out.println("SharedObject1::volatileVar = " + sharedObj1.volatileVar);
+        System.out.println("SharedObject1::staticVolatileVar = " + sharedObj1.staticVolatileVar);
+
+        System.out.println("SharedObject2::staticVar = " + sharedObj2.staticVar);
+        System.out.println("SharedObject2::volatileVar = " + sharedObj2.volatileVar);
+        System.out.println("SharedObject2::staticVolatileVar = " + sharedObj2.staticVolatileVar);
     }
 
 }
