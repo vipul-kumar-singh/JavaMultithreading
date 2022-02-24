@@ -2,7 +2,6 @@ package com.vkstech.multithreading.concurrent;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.logging.Logger;
 
 public class CyclicBarrierDemo {
 
